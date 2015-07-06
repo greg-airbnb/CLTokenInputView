@@ -11,6 +11,8 @@
 #import "CLToken.h"
 
 @class CLTokenInputView;
+@class CLTokenView;
+
 @protocol CLTokenInputViewDelegate <NSObject>
 
 @optional
@@ -49,6 +51,11 @@
  * frames to make sure the token view still fits.
  */
 - (void)tokenInputView:(CLTokenInputView *)view didChangeHeightTo:(CGFloat)height;
+
+/**
+ * implement this method if you want to implement custom CLTokenViews
+ */
+- (CLTokenView *)tokenInputView:(CLTokenInputView *)view createTokenViewForToken:(CLToken *)token;
 
 @end
 

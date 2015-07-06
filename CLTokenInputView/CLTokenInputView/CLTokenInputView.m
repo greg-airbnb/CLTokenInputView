@@ -105,6 +105,18 @@ static CGFloat const FIELD_MARGIN_X = 4.0; // Note: Same as CLTokenView.PADDING_
 
 #pragma mark - Adding / Removing Tokens
 
+- (CLTokenView *)createTokenViewForToken:(CLToken *)token {
+  CLTokenView *tokenView;
+
+  if ([self.delegate respondsToSelector:@selector(tokenInputView:createTokenViewForToken:)]) {
+    tokenView = [self.delegate tokenInputView:self createTokenViewForToken:token];
+  } else {
+    tokenView = [[CLTokenView alloc] initWithToken:token];
+  }
+
+  return tokenView;
+}
+
 - (void)addToken:(CLToken *)token
 {
     if ([self.tokens containsObject:token]) {
@@ -112,9 +124,12 @@ static CGFloat const FIELD_MARGIN_X = 4.0; // Note: Same as CLTokenView.PADDING_
     }
 
     [self.tokens addObject:token];
-    CLTokenView *tokenView = [[CLTokenView alloc] initWithToken:token];
+
+    CLTokenView *tokenView = [self createTokenViewForToken:token];
     if ([self respondsToSelector:@selector(tintColor)]) {
-        tokenView.tintColor = self.tintColor;
+        if (tokenView.tintColor == nil) {
+          tokenView.tintColor = self.tintColor;
+        }
     }
     tokenView.delegate = self;
     CGSize intrinsicSize = tokenView.intrinsicContentSize;
