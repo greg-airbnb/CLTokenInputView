@@ -91,6 +91,12 @@ static CGFloat const FIELD_MARGIN_X = 4.0; // Note: Same as CLTokenView.PADDING_
     return CGSizeMake(UIViewNoIntrinsicMetric, MAX(45, self.intrinsicContentHeight));
 }
 
+- (void)setFont:(UIFont *)font {
+  _font = font;
+
+  self.textField.font = font;
+  self.fieldLabel.font = font;
+}
 
 #pragma mark - Tint color
 

@@ -78,6 +78,9 @@
 @property (readonly, nonatomic) CGFloat textFieldDisplayOffset;
 @property (readonly, nonatomic) NSString *text;
 
+/** set the font of the field label and the textfield */
+@property (strong, nonatomic) UIFont *font;
+
 - (void)addToken:(CLToken *)token;
 - (void)removeToken:(CLToken *)token;
 - (CLToken *)tokenizeTextfieldText;
